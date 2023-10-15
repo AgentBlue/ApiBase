@@ -1,2 +1,2 @@
-# ApiBase
-base api using express
+# Node Base API
+This is the repository for the base API project. Fork this project to start developing your API. First, clone the repository:
