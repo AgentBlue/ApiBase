@@ -1,4 +1,4 @@
-import { ControllerBase } from './controller-base.js'
+import { ControllerBase } from '@agentblue/api-framework'
 
 export default class HealthController extends ControllerBase {
   index() {

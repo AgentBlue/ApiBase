@@ -2,21 +2,19 @@ import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
-// import axios from 'axios'
+import axios from 'axios'
 // import mongoose from 'mongoose'
-// import Handlebars from 'handlebars'
 
+
+import { Logger } from '@agentblue/api-logging'
+import { resource, route } from '@agentblue/api-framework'
 import Api from './api/index.js'
 import initRoutes from './api/routes/index.js'
 import controllers from './api/controllers/index.js'
-import { Logger } from './logging/logger.js'
-import { resource } from './api/routes/resource.js'
-import { route } from './api/routes/route.js'
 
 // Services
 
 // Middleware
-import authentication from './api/middleware/authentication.js'
 
 // import initializeMongo from './mongo/index.js'
 // import initializeRepositories from './repositories/index.js'
@@ -68,7 +66,6 @@ export default class Application {
       resource,
       route,
       middleware: {
-        authentication: authentication()
       }
     })
 
