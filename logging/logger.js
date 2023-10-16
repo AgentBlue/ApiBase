@@ -41,7 +41,7 @@ class Logger {
     if (message instanceof Error) {
       message = message.stack
     }
-    this.log(message, { level: 3, color: 'red', fn: this.errFn})
+    this.log(message, { level: 3, color: 'red', fn: this.errFn })
   }
 
   log(m, { level, color, fn }) {

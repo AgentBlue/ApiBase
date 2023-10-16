@@ -1,26 +1,25 @@
 import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
-// import redis from 'redis'
 import bodyParser from 'body-parser'
-import { Logger } from '@brandmuscle/api-logging'
-import { resource, route } from '@brandmuscle/api-framework'
-import axios from 'axios'
-import mongoose from 'mongoose'
-import Handlebars from 'handlebars'
+// import axios from 'axios'
+// import mongoose from 'mongoose'
+// import Handlebars from 'handlebars'
 
 import Api from './api/index.js'
 import initRoutes from './api/routes/index.js'
 import controllers from './api/controllers/index.js'
-// import RedisCache from './caching/redis-cache.js'
+import { Logger } from './logging/logger.js'
+import { resource } from './api/routes/resource.js'
+import { route } from './api/routes/route.js'
 
 // Services
 
 // Middleware
 import authentication from './api/middleware/authentication.js'
 
-import initializeMongo from './mongo/index.js'
-import initializeRepositories from './repositories/index.js'
+// import initializeMongo from './mongo/index.js'
+// import initializeRepositories from './repositories/index.js'
 
 
 export default class Application {
@@ -41,17 +40,9 @@ export default class Application {
     // eslint-disable-next-line no-console
     const logger = new Logger({ fn: console.log, errFn: console.error, level: environment.LOG_LEVEL || 'debug' })
 
-    // caching - uncomment if you intend to use redis caching
-    // const redisClient = redis.createClient({ url: environment.REDIS_CONNECTION_STRING })
-    // redisClient.on('connect', () => logger.info('Connected to redis'))
-    // redisClient.on('error', logger.error.bind(logger))
-    // await redisClient.connect()
-    // const cache = new RedisCache(redisClient, { ttl: parseInt(environment.REDIS_DEFAULT_TTL || 60) })
-    // context.cache = cache
-
     // Init mongo db
-    initializeMongo(mongoose)
-    const repositories = initializeRepositories({ orm: mongoose })
+    // initializeMongo(mongoose)
+    // const repositories = initializeRepositories({ orm: mongoose })
 
     // Services
 
@@ -59,8 +50,8 @@ export default class Application {
       // add services here to make them available in controller methods and chatGPT functions
     }
 
-    mongoose.set('strictQuery', false)
-    await mongoose.connect(environment.MONGO_URL)
+    // mongoose.set('strictQuery', false)
+    // await mongoose.connect(environment.MONGO_URL)
 
     const app = express()
     app.use(cors({
@@ -85,7 +76,7 @@ export default class Application {
       app,
       port: environment.PORT,
       controllers,
-      repositories,
+      // repositories,
       services,
       logger,
       routes
