@@ -7,7 +7,7 @@ if (!environment.NODE_ENV) {
   environment.NODE_ENV = 'development'
 }
 
-environment.PORT = environment.PORT || 5000
+environment.PORT = environment.PORT || 5001
 
 const application = new Application()
 application.main({ environment })
